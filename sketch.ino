@@ -9,7 +9,7 @@
 
 //Wifi params
 const char* ssid = "your-ssid-here";
-const char* password = "yourr-passw-here";
+const char* password = "your-passw-here";
 
 //D1 is connected to DHT11 data channel
 #define DHTPIN      5
