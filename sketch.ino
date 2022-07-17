@@ -8,10 +8,10 @@
 
 
 //Wifi params
-const char* ssid = "TP-LINK_81CC";
-const char* password = "67652594";
+const char* ssid = "your-ssid-here";
+const char* password = "yourr-passw-here";
 
-//D1 is connected to DHT11
+//D1 is connected to DHT11 data channel
 #define DHTPIN      5
 #define DHTTYPE     DHT11
 
@@ -28,8 +28,8 @@ AsyncWebServer server(80);
 //Store last time DHT was updated
 unsigned long previousMillis = 0;
 
-//Interval among DHT readings
-//(DHT11 supports max 1read/1s = 1Hz lectures)
+// Interval (millis) among DHT readings (max 1read/1s = 1Hz)
+// Interval set as 5 seconds.
 const long interval = 5000; 
 
 //WebPage to be displayed (uses ESPAsyncWebServer)
@@ -152,8 +152,7 @@ const char index_html[] PROGMEM = R"=====(
 )=====";
 
 
-//Function that replaces %placeholders%
-//of html page with DHT values
+//Function that replaces %placeholders% of html page with DHT values
 String processPlaceholder(const String& var){
   if(var == "TEMPERATURE"){
     return String(temperature);
@@ -184,7 +183,7 @@ void setup() {
   Serial.println(WiFi.localIP());
   Serial.println(WiFi.macAddress());
 
-  // Route for root / web page
+  // Async Server
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send_P(200, "text/html", index_html, processPlaceholder);
   });
@@ -201,25 +200,25 @@ void setup() {
 
 
 void loop() {
-unsigned long currentMillis = millis();
+  unsigned long currentMillis = millis();
   if (currentMillis - previousMillis >= interval) {
-    // save the last update time
+    // save last update time
     previousMillis = currentMillis;
-    // Read temperature
-    float newT = dht.readTemperature();
-    if (isnan(newT)) {
+    // read temperature
+    float newTemp = dht.readTemperature();
+    if (isnan(newTemp)) {
       Serial.println("Failed to read from DHT sensor!");
     }
     else {
-      temperature = newT;
+      temperature = newTemp;
     }
-    // Read Humidity
-    float newH = dht.readHumidity();
-    if (isnan(newH)) {
+    // read humidity
+    float newHum = dht.readHumidity();
+    if (isnan(newHum)) {
       Serial.println("Failed to read from DHT sensor!");
     }
     else {
-      humidity = newH;
+      humidity = newHum;
     }
   }
 }
