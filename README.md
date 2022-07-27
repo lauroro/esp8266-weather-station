@@ -46,6 +46,10 @@ The mcu uses the DHT11 sensor to record temperature and humidity values and it s
 Everytime someone connects to the root of the webserver, the mcu outputs the webpage. From the webpage we can see the values of the last record, but also a plot chart of the latest twenty records. Of course the content is dynamic thanks to Javascript. The chart is made with [chartjs](https://www.chartjs.org/). The chart canvas along with the rest of the web-interface is responsive thanks to the use of media queries.
 
 ## Demo
-Here is a 4x speed demo of the webpage UI to see what to expect.
+Sorry if If i recorded from mobile, i'm having problems with screencast.
+![WGIQ65Z - Imgur](https://user-images.githubusercontent.com/88981092/181226971-93f95b2f-7a33-41bb-affc-9e0d02baa40d.png)
 
-![final_62d42640aa6907005ec0bb44_886437](https://user-images.githubusercontent.com/88981092/179406486-98ea10e7-c990-4647-b452-5bdb8cc181d1.gif)
+
+
+https://user-images.githubusercontent.com/88981092/181229246-fc35eae6-2822-4223-bb1c-f5510a64c6d8.mp4
+
