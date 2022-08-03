@@ -1,3 +1,26 @@
+// ------------------ General --------------------
+
+/*
+* <ESP-IP-ADDRESS>[/?name=name-value]
+*
+* // Fields
+* name-value : everything
+*/
+
+// Defaults
+var deviceName = "ESP8266 - Weather Station";
+
+
+var queryString = decodeURIComponent(window.location.search); //parsing
+queryString = queryString.substring(1); 
+var queries = queryString.split("="); 
+if(queries[0] == "name" && queries[1] != "")
+  deviceName = queries[1];
+
+document.getElementById("header").textContent = deviceName;
+
+
+// ----- INIT ------
 
 var tValue;
 var hValue;
@@ -27,6 +50,9 @@ var chart = new Chart(ctx, {
     }
   }
 });
+
+
+// ------- CHART UPDATE LOOP --------
 
 setInterval(function ( ) {
   // https://www.w3schools.com/xml/xml_http.asp

@@ -9,28 +9,29 @@
 
 
 //Wifi params
-const char* ssid = "your-ssid-here";
-const char* password = "your-passwd-here";
+const char* ssid = "TP-LINK_81CC";
+const char* password = "67652594";
 
-//D1 is connected to DHT11 data channel
+// D1 is connected to DHT11 data channel
 #define DHTPIN      5
 
-//To interact with DHT
+// DHT handler
 DHT dht(DHTPIN, DHT11);
 
-//Global variables to be updated in loop()
+// State variables
 float temperature = 0.0;
 float humidity = 0.0;
 
-//Create AsyncWebServer object on port 80
+// AsyncWebServer object on port 80
 AsyncWebServer server(80);
 
-//Store last time DHT was updated
-unsigned long previousMillis = 0;
+// Store last time DHT was updated
+// unsigned long previousMillis = 0;
 
 // Interval (millis) among DHT readings (max 1read/1s = 1Hz)
 // Interval set as 5 seconds.
-const long interval = 5000; 
+//const long interval = 5000;
+const unsigned short int interval = 5000;
 
 
 //Function that replaces %placeholders% of html page with DHT values
@@ -57,14 +58,12 @@ void setup() {
   // Connect to WiFi
   WiFi.begin(ssid, password);
 
-  //print "." while not connected
   while (WiFi.status() != WL_CONNECTED) {
      delay(500);
      Serial.print(".");
   }
   Serial.println("");
   Serial.println("WiFi connected");
-  // Print the IP address and MAC
   Serial.println(WiFi.localIP());
   Serial.println(WiFi.macAddress());
 
@@ -73,7 +72,8 @@ void setup() {
     request->send(LittleFS, "/index.html", String(), false, processPlaceholder);
   });
   server.serveStatic("/", LittleFS, "/");
-  
+
+  // Requests
   server.on("/temperature", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send_P(200, "text/plain", String(temperature).c_str());
   });
@@ -88,7 +88,7 @@ void setup() {
 
 
 void loop() {
-  unsigned long currentMillis = millis();
+  /*unsigned long currentMillis = millis();
   if (currentMillis - previousMillis >= interval) {
     // save last update time
     previousMillis = currentMillis;
@@ -108,5 +108,21 @@ void loop() {
     else {
       humidity = newHum;
     }
+  }*/
+  float newTemp = dht.readTemperature();
+  if (isnan(newTemp)) {
+    Serial.println("Failed to read from DHT sensor!");
   }
+  else {
+    temperature = newTemp;
+  }
+  // read humidity
+  float newHum = dht.readHumidity();
+  if (isnan(newHum)) {
+    Serial.println("Failed to read from DHT sensor!");
+  }
+  else {
+    humidity = newHum;
+  }
+  delay(interval);
 }
