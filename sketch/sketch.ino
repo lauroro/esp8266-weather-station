@@ -25,12 +25,6 @@ float humidity = 0.0;
 // AsyncWebServer object on port 80
 AsyncWebServer server(80);
 
-// Store last time DHT was updated
-// unsigned long previousMillis = 0;
-
-// Interval (millis) among DHT readings (max 1read/1s = 1Hz)
-// Interval set as 5 seconds.
-//const long interval = 5000;
 const unsigned short int interval = 5000;
 
 
@@ -88,27 +82,6 @@ void setup() {
 
 
 void loop() {
-  /*unsigned long currentMillis = millis();
-  if (currentMillis - previousMillis >= interval) {
-    // save last update time
-    previousMillis = currentMillis;
-    // read temperature
-    float newTemp = dht.readTemperature();
-    if (isnan(newTemp)) {
-      Serial.println("Failed to read from DHT sensor!");
-    }
-    else {
-      temperature = newTemp;
-    }
-    // read humidity
-    float newHum = dht.readHumidity();
-    if (isnan(newHum)) {
-      Serial.println("Failed to read from DHT sensor!");
-    }
-    else {
-      humidity = newHum;
-    }
-  }*/
   float newTemp = dht.readTemperature();
   if (isnan(newTemp)) {
     Serial.println("Failed to read from DHT sensor!");
@@ -116,7 +89,6 @@ void loop() {
   else {
     temperature = newTemp;
   }
-  // read humidity
   float newHum = dht.readHumidity();
   if (isnan(newHum)) {
     Serial.println("Failed to read from DHT sensor!");
