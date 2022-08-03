@@ -9,8 +9,8 @@
 
 
 //Wifi params
-const char* ssid = "TP-LINK_81CC";
-const char* password = "67652594";
+const char* ssid = "your-ssid-here";
+const char* password = "your-passwd-here";
 
 // D1 is connected to DHT11 data channel
 #define DHTPIN      5
