@@ -45,10 +45,23 @@ The mcu uses the DHT11 sensor to record temperature and humidity values and it s
 ### Webpage
 Everytime someone connects to the root of the webserver, the mcu outputs the webpage. From the webpage we can see the values of the last record, but also a plot chart of the latest twenty records. Of course the content is dynamic thanks to Javascript. The chart is made with [chartjs](https://www.chartjs.org/). The chart canvas along with the rest of the web-interface is responsive thanks to the use of media queries.
 
+## Custom name
+The last commit introduced the possibility to open the webpage with a custom name as the header. The way it's done is via URL.
+```
+<ESP-IP-ADDRESS>[/?name=name-value]
+
+// Fields
+name-value : everything but blank
+
+// Defaults
+name-value : "ESP8266 - Weather Station"
+```
+
 ## Demo
-Sorry if If i recorded from mobile, i'm having problems with screencast.
+Sorry if If i recorded from mobile, I was having problems with screencast.
 ![WGIQ65Z - Imgur](https://user-images.githubusercontent.com/88981092/181226971-93f95b2f-7a33-41bb-affc-9e0d02baa40d.png)
 
+![Schermata del 2022-08-03 18-40-21](https://user-images.githubusercontent.com/88981092/182664129-b250b601-da09-4127-b70c-d6454c38e97d.png)
 
 
 https://user-images.githubusercontent.com/88981092/181229246-fc35eae6-2822-4223-bb1c-f5510a64c6d8.mp4
