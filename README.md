@@ -4,6 +4,7 @@ Simple weather station (temperature and humidity) made with an esp8266 and a DHT
 
 ## Circuit
 Follow this. It's clean and simple.
+
 ![NodeMCU-ESP8266-and-DHT11DHT22-Schematic-Diagram](https://user-images.githubusercontent.com/88981092/179401236-158f1562-7662-4d65-98e9-dc4e04b6a4c0.jpeg)
 
 ## What's needed
